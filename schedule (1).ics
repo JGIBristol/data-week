@@ -1,0 +1,116 @@
+BEGIN:VCALENDAR
+PRODID:SinglePageSchedule
+VERSION:2.0
+X-WR-CALNAME:
+X-PUBLISHED-TTL:PT6H
+BEGIN:VEVENT
+UID:20240603T100000Z-JGI-Director's-Introduction-to-Data-Week-2024-(Online)
+DTSTAMP:20250402T113734Z
+SUMMARY:JGI Director's Introduction to Data Week 2024 (Online)
+DESCRIPTION:JGI Director's Introduction to Data Week 2024 (Online)\nDan Lawson\nhttps://buytickets.at/jgibristol/1223987?ref&#x3D;schedule\nSeminar\nOnline\n
+DTSTART:20240603T100000Z
+DTEND:20240603T105000Z
+TRANSP:TRANSPARENT
+LOCATION:Online; Seminar
+END:VEVENT
+BEGIN:VEVENT
+UID:20240603T101500Z-Drop-in-Installation-Help-Session-for-R-and-Python
+DTSTAMP:20250402T113734Z
+SUMMARY:Drop-in Installation Help Session for R and Python
+DESCRIPTION:Drop-in Installation Help Session for R and Python\nJGI Team\nhttps://buytickets.at/jgibristol/1223988?ref&#x3D;schedule\nTraining\nOnline &amp; in-person\n
+DTSTART:20240603T101500Z
+DTEND:20240603T113000Z
+TRANSP:TRANSPARENT
+LOCATION:Online &amp; in-person; Training
+END:VEVENT
+BEGIN:VEVENT
+UID:20240603T110000Z-Special-Edition:-Bristol-DataViz-Group-(Online)
+DTSTAMP:20250402T113734Z
+SUMMARY:Special Edition: Bristol DataViz Group (Online)
+DESCRIPTION:Special Edition: Bristol DataViz Group (Online)\nhttps://buytickets.at/jgibristol/1223990?ref&#x3D;schedule\nSeminar\nOnline\n
+DTSTART:20240603T110000Z
+DTEND:20240603T115000Z
+TRANSP:TRANSPARENT
+LOCATION:Online; Seminar
+END:VEVENT
+BEGIN:VEVENT
+UID:20240603T130000Z-Mood-Music:-what-can-we-learn-about-well-being-from-our-music-listening?-(Online)
+DTSTAMP:20250402T113734Z
+SUMMARY:Mood Music: what can we learn about well-being from our music listening? (Online)
+DESCRIPTION:Mood Music: what can we learn about well-being from our music listening? (Online)\nNina Di Cara\nhttps://buytickets.at/jgibristol/1223991?ref&#x3D;schedule\nSeminar\nOnline\n
+DTSTART:20240603T130000Z
+DTEND:20240603T135000Z
+TRANSP:TRANSPARENT
+LOCATION:Online; Seminar
+END:VEVENT
+BEGIN:VEVENT
+UID:20240603T130000Z-Beginning-Python
+DTSTAMP:20250402T113734Z
+SUMMARY:Beginning Python
+DESCRIPTION:Beginning Python\nJGI Team\nhttps://buytickets.at/jgibristol/1223992?ref&#x3D;schedule\nTraining\nIn-person\n
+DTSTART:20240603T130000Z
+DTEND:20240603T160000Z
+TRANSP:TRANSPARENT
+LOCATION:In-person; Training
+END:VEVENT
+BEGIN:VEVENT
+UID:20240603T140000Z-Revolutionising-Health-and-Care-With-Data:-From-Patients-to-Populations-to-Systems
+DTSTAMP:20250402T113734Z
+SUMMARY:Revolutionising Health and Care With Data: From Patients to Populations to Systems
+DESCRIPTION:Revolutionising Health and Care With Data: From Patients to Populations to Systems\nLEAP Digital Health Hub\nhttps://buytickets.at/jgibristol/1243317?ref&#x3D;schedule\nSeminar\nOnline\n
+DTSTART:20240603T140000Z
+DTEND:20240603T153000Z
+TRANSP:TRANSPARENT
+LOCATION:Online; Seminar
+END:VEVENT
+BEGIN:VEVENT
+UID:20240604T090000Z-Careers-in-Data-Science-(Online)
+DTSTAMP:20250402T113734Z
+SUMMARY:Careers in Data Science (Online)
+DESCRIPTION:Careers in Data Science (Online)\nAlison Adams, Luke Stoughton\nhttps://buytickets.at/jgibristol/1223994?ref&#x3D;schedule\nSeminar\nOnline\n
+DTSTART:20240604T090000Z
+DTEND:20240604T095000Z
+TRANSP:TRANSPARENT
+LOCATION:Online; Seminar
+END:VEVENT
+BEGIN:VEVENT
+UID:20240604T090000Z-Beginning-R
+DTSTAMP:20250402T113734Z
+SUMMARY:Beginning R
+DESCRIPTION:Beginning R\nJGI Team\nhttps://buytickets.at/jgibristol/1223995?ref&#x3D;schedule\nTraining\nIn-person\n
+DTSTART:20240604T090000Z
+DTEND:20240604T120000Z
+TRANSP:TRANSPARENT
+LOCATION:In-person; Training
+END:VEVENT
+BEGIN:VEVENT
+UID:20240604T100000Z-Special-Edition-Data-Ethics-Club:-How-AI-could-save-or-destroy-education-(Online)
+DTSTAMP:20250402T113734Z
+SUMMARY:Special Edition Data Ethics Club: How AI could save or destroy education (Online)
+DESCRIPTION:Special Edition Data Ethics Club: How AI could save or destroy education (Online)\nNina Di Cara, Huw Day\nhttps://buytickets.at/jgibristol/1223996?ref&#x3D;schedule\nWorkshop\nOnline\n
+DTSTART:20240604T100000Z
+DTEND:20240604T105000Z
+TRANSP:TRANSPARENT
+LOCATION:Online; Workshop
+END:VEVENT
+BEGIN:VEVENT
+UID:20240604T110000Z-A-more-inclusive-Data-Science-(Online)
+DTSTAMP:20250402T113734Z
+SUMMARY:A more inclusive Data Science (Online)
+DESCRIPTION:A more inclusive Data Science (Online)\nhttps://buytickets.at/jgibristol/1223998?ref&#x3D;schedule\nSeminar\nOnline\n
+DTSTART:20240604T110000Z
+DTEND:20240604T120000Z
+TRANSP:TRANSPARENT
+LOCATION:Online; Seminar
+END:VEVENT
+BEGIN:VEVENT
+UID:20240604T120000Z-Networking-Lunch
+DTSTAMP:20250402T113734Z
+SUMMARY:Networking Lunch
+DESCRIPTION:Networking Lunch\nPlease book in advance\nhttps://buytickets.at/jgibristol/1223999?ref&#x3D;schedule\nSocial\nIn-person\n
+DTSTART:20240604T120000Z
+DTEND:20240604T130000Z
+TRANSP:TRANSPARENT
+LOCATION:In-person; Social
+END:VEVENT
+END:VCALENDAR
