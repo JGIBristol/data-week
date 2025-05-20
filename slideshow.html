@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Schedule Slideshow</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 2em;
+      background: #772059;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    #slideshow {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide {
+      background: #fff;
+      color: #222;
+      border-radius: 1rem;
+      box-shadow: 0 2px 16px #0002;
+      margin: 0 auto;
+      width: 80vw;
+      height: 80vh;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      justify-content: flex-start;
+      box-sizing: border-box;
+      transition: box-shadow 0.3s;
+      padding: 2.5rem 5rem;
+    }
+
+    .slide-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: top;
+      flex: 1 1 0;
+    }
+
+    .slide h2 {
+      margin: 1em 0;
+      font-size: 2.2em;
+      color: #772059;
+      font-weight: bold;
+      line-height: 1.1;
+    }
+
+    .slide h3 {
+      margin: 0.5em 0 0.2em 0;
+      font-size: 1.3em;
+      color: #772059;
+    }
+
+    .slide .meta {
+      margin: 0.5em 0 1em 0;
+      color: #555;
+      font-size: 1.1em;
+      font-weight: bold;
+      line-height: 1.5;
+    }
+
+    .slide .speaker {
+      color: #333;
+      font-size: 1em;
+    }
+
+    .slide .type {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 1em;
+      font-weight: bold;
+      margin-right: 0.5em;
+      text-transform: uppercase;
+    }
+
+    .slide .type.Seminar {
+      background: #ee7219;
+      color: #fff;
+    }
+
+    .slide .type.Training {
+      background: #0cc6de;
+      color: #fff;
+    }
+
+    .slide .type.Workshop {
+      background: #a3b703;
+      color: #fff;
+    }
+
+    .slide .type.Social {
+      background: #e0249a;
+      color: #fff;
+    }
+
+    .slide .location {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 1em;
+      font-weight: bold;
+      margin-left: 0.5em;
+      background: #772059;
+      color: #fff;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="slideshow"></div>
+  <script>
+    function startSlideshow() {
+      fetchSchedule()
+        .then(filterFutureEvents)
+        .then(runSlideshow)
+        .catch(e => {
+          console.error(e);
+          document.getElementById('slideshow').innerHTML = '<div class="slide"><h2>Error</h2></div>';
+        });
+    }
+
+    function fetchSchedule() {
+      return fetch('index.html', { cache: 'no-store' })
+        .then(result => result.text())
+        .then(html => new DOMParser().parseFromString(html, 'text/html'))
+        .then(parseEvents);
+    }
+
+    function parseEvents(doc) {
+      const days = doc.querySelectorAll('#schedule ul');
+      const events = [];
+      days.forEach(day => {
+        const date = day.querySelector('.schedule_heading h2')?.textContent.trim();
+        day.querySelectorAll('.schedule_event').forEach(event => {
+          // Get ISO start date from <time datetime="...">
+          let isoStart = '';
+          const timeElem = event.querySelector('time');
+          if (timeElem && timeElem.hasAttribute('datetime')) {
+            // Format: "2025-06-02T08:30:00.000Z-2025-06-02T11:30:00.000Z"
+            // Use only the first part before the first '-', but note there are
+            // '-' in the date too
+            const dtAttr = timeElem.getAttribute('datetime');
+            const dashIdx = dtAttr.indexOf('Z-');
+            isoStart = dashIdx > 0 ? dtAttr.substring(0, dashIdx + 1) : dtAttr;
+          }
+          events.push({
+            title: event.querySelector('h3 a')?.textContent.trim(),
+            date: date,
+            time: event.querySelector('[aria-label="Time"]')?.textContent.trim(),
+            type: event.querySelector('.schedule_type')?.textContent.trim(),
+            location: event.querySelector('.schedule_location')?.textContent.trim(),
+            speaker: event.querySelector('[aria-label="Speaker"]')?.textContent.trim(),
+            isoStart: isoStart,
+            futureIndicator: getFutureIndicator(isoStart)
+          });
+        });
+      });
+      return events;
+    }
+
+    function filterFutureEvents(events) {
+      const hasLaterToday = events.some(ev => ev.futureIndicator === "Later today");
+      if (hasLaterToday) {
+        return events.filter(ev => ev.futureIndicator === "Later today" || ev.futureIndicator === "Tomorrow");
+      }
+      const hasTomorrow = events.some(ev => ev.futureIndicator === "Tomorrow");
+      if (hasTomorrow) {
+        return events.filter(ev => ev.futureIndicator === "Tomorrow" || ev.futureIndicator === "Later in the week");
+      }
+      return events;
+    }
+
+    function getFutureIndicator(timestamp, now=new Date()) {
+      const eventDate = new Date(timestamp);
+
+      // Get local date parts
+      const eventYMD = [eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate()];
+      const nowYMD = [now.getFullYear(), now.getMonth(), now.getDate()];
+
+      // Calculate difference in days
+      const eventMidnight = new Date(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate());
+      const nowMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const msPerDay = 24 * 60 * 60 * 1000;
+      const diffDays = Math.round((eventMidnight - nowMidnight) / msPerDay);
+
+      if (diffDays === 0) {
+        return "Later today";
+      } else if (diffDays === 1) {
+        return "Tomorrow";
+      } else if (diffDays > 1 && diffDays < 7) {
+        return "Later in the week";
+      } else if (diffDays > 0) {
+        return "Coming up";
+      } else {
+        return "";  // In the past
+      }
+    }
+
+    function renderSlide(event) {
+      let typeClass = '';
+      if (event.type) {
+        if (/seminar/i.test(event.type)) typeClass = 'Seminar';
+        else if (/training/i.test(event.type)) typeClass = 'Training';
+        else if (/workshop/i.test(event.type)) typeClass = 'Workshop';
+        else if (/social/i.test(event.type)) typeClass = 'Social';
+      }
+      return `
+        <div class="slide">
+          <div class="slide-content">
+            <div class="meta">
+              ${event.futureIndicator}<br>
+              ${event.date ? event.date : ''}${event.time ? ', ' + event.time : ''}
+            </div>
+            <div>
+              ${event.type ? `<span class="type ${typeClass}">${event.type}</span>` : ''}
+              ${event.location ? `<span class="location">${event.location}</span>` : ''}
+            </div>
+            <h2>${event.title}</h2>
+            ${event.speaker ? `<div class="speaker">${event.speaker}</div>` : ''}
+          </div>
+        </div>
+      `;
+    }
+
+    function runSlideshow(events) {
+      const slideshow = document.getElementById('slideshow');
+      if (!events.length) {
+        slideshow.innerHTML = '<div class="slide"><h2>No events found</h2></div>';
+        return;
+      }
+      let idx = 0;
+      function showSlide(i) {
+        slideshow.innerHTML = renderSlide(events[i]);
+      }
+      showSlide(idx);
+      setInterval(() => {
+        idx = (idx + 1) % events.length;
+        showSlide(idx);
+      }, 5000);
+    }
+
+    window.onload = startSlideshow;
+  </script>
+</body>
+
+</html>
