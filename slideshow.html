@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Schedule Slideshow</title>
+  <title>Upcoming events slideshow</title>
   <style>
     body {
       font-family: Arial, Helvetica, sans-serif;
@@ -161,7 +161,6 @@
             time: event.querySelector('[aria-label="Time"]')?.textContent.trim(),
             type: event.querySelector('.schedule_type')?.textContent.trim(),
             location: event.querySelector('.schedule_location')?.textContent.trim(),
-            speaker: event.querySelector('[aria-label="Speaker"]')?.textContent.trim(),
             isoStart: isoStart,
             futureIndicator: getFutureIndicator(isoStart)
           });
@@ -228,7 +227,6 @@
               ${event.location ? `<span class="location">${event.location}</span>` : ''}
             </div>
             <h2>${event.title}</h2>
-            ${event.speaker ? `<div class="speaker">${event.speaker}</div>` : ''}
           </div>
         </div>
       `;
