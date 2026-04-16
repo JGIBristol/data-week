@@ -471,7 +471,7 @@
 
                                 {{#each events}}
                                 <li class="schedule_event schedule_type_{{toLower type}} schedule_column_{{column}}" style="grid-row: time-{{toStylesheetTime (toStartRow startTime)}} / time-{{toStylesheetTime (toEndRow endTime)}};">
-                                    <time datetime="{{toIsoTime startTime}}-{{toIsoTime endTime}}"><span aria-label="Date" class="sr-only">{{toDay date}}{{toOrdinal date}} {{toMonth date}},</span> <span aria-label="Time">{{toTime startTime}}-{{toTime endTime}}</span></time>
+                                    <time datetime="{{toIsoTime startTime}}/{{toIsoTime endTime}}"><span aria-label="Date" class="sr-only">{{toDay date}}{{toOrdinal date}} {{toMonth date}},</span> <span aria-label="Time">{{toTime startTime}}-{{toTime endTime}}</span></time>
                                     {{#if location}}<span aria-label="Location" class="schedule_location schedule_location_{{toLower location}}">{{nonBreakingHyphen location}}</span>{{/if}}
                                     {{#if type}}<span aria_label="Event type" class="schedule_type">{{type}}</span>{{/if}}
                                     <h3>
